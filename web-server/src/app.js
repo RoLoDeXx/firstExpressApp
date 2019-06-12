@@ -6,6 +6,7 @@ const forcast = require("./utils/forcast");
 const geocode = require("./utils/geocode");
 
 const app = express();
+const port = process.env.PORT || 3000;
 
 app.set("view engine", "hbs"); //set view engine aka template engine
 
@@ -85,4 +86,4 @@ app.get("*", (req, res) => {
   });
 });
 
-app.listen(3000);
+app.listen(port);

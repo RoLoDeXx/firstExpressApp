@@ -8,7 +8,7 @@ document.addEventListener("submit", e => {
   const location = search.value;
   paraOne.textContent = "Loading...";
 
-  fetch("http://localhost:3000/weather?address=" + location).then(reponse => {
+  fetch("/weather?address=" + location).then(reponse => {
     reponse.json().then(data => {
       if (data.error) {
         paraOne.textContent = data.error;
