@@ -64,13 +64,17 @@ app.get("/weather", (req, res) => {
       if (error) return res.send({ error });
 
       forcast([latitude, longitude], (error, forcast) => {
+        console.log(forcast);
+
         if (error) return res.send({ error });
+
         res.send({
-          forcast: forcast.daily.summary,
-          temp: forcast.currently.temperature + "C",
+          summary: forcast.daily.summary,
           location,
-          address: req.query.address,
-          icon: forcast.currently.icon
+          rainChance: forcast.currently.precipProbability,
+          avgTemp: forcast.currently.temperature,
+          minTemp: forcast.daily.data[0].temperatureLow,
+          maxTemp: forcast.daily.data[0].temperatureHigh
         });
       });
     }
