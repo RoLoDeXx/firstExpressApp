@@ -41,31 +41,17 @@ app.get("/products", (req, res) => {
   }
 });
 
-app.get("/weather", (req, res) => {
+app.get("/weather", async (req, res) => {
   if (!req.query.address)
     return res.send("You must provide an address to work");
 
-  geocode(
-    req.query.address,
-    (error, { latitude, longitude, location } = {}) => {
-      if (error) return res.send({ error });
+  let locationData = await geocode(req.query.address);
+  let weatherData = await forcast({
+    longitude: locationData[0],
+    latitude: locationData[1]
+  });
 
-      forcast([latitude, longitude], (error, forcast) => {
-        //console.log(forcast);
-
-        if (error) return res.send({ error });
-
-        res.send({
-          summary: forcast.daily.summary,
-          location,
-          rainChance: forcast.currently.precipProbability,
-          avgTemp: forcast.currently.temperature,
-          minTemp: forcast.daily.data[0].temperatureLow,
-          maxTemp: forcast.daily.data[0].temperatureHigh
-        });
-      });
-    }
-  );
+  res.render("index.hbs", weatherData);
 });
 
 app.get("*", (req, res) => {
