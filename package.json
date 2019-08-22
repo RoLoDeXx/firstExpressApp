@@ -12,6 +12,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "hbs": "^4.0.4",
+    "node-fetch": "^2.6.0",
     "request": "^2.88.0"
   }
 }
