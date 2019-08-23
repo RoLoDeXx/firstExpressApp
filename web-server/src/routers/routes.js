@@ -3,6 +3,13 @@ const forcast = require("../utils/forcast");
 const geocode = require("../utils/geocode");
 
 const app = new express.Router();
+// app.get("", (req, res) => {
+//   res.render("index", {
+//     title: "Weather",
+//     name: "Samarth"
+//   });
+// });
+
 app.get("", (req, res) => {
   res.render("index", {
     title: "Weather",
@@ -34,32 +41,23 @@ app.get("/help/*", (req, res) => {
   });
 });
 
-app.get("/products", (req, res) => {
-  if (!req.query.search) {
-    res.send("Error you must provide a search statemnet");
-    return;
-  }
-});
+app.get("/weather/:loc", async (req, res) => {
+  // if (!req.query.address)
+  // return res.send("You must provide an address to work");
+  let loc = req.params.loc;
+  let locationData = await geocode(loc);
 
-app.get("/weather", async (req, res) => {
-  if (!req.query.address)
-    return res.send("You must provide an address to work");
+  console.log(locationData.features[0].center);
 
-  let locationData = await geocode(req.query.address);
   let weatherData = await forcast({
     longitude: locationData[0],
     latitude: locationData[1]
   });
 
-  res.render("index.hbs", weatherData);
-});
-
-app.get("*", (req, res) => {
-  res.render("404", {
-    errorName: "Not Found",
-    errorMessage: "Page not found",
-    name: "Samarth",
-    title: "Error 404"
+  res.render("index", {
+    weatherData,
+    title: "Weather",
+    name: "Samarth"
   });
 });
 

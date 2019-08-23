@@ -1,7 +1,5 @@
 const fetch = require("node-fetch");
 
-address = "delhi";
-
 const geocode = async address => {
   url =
     "https://api.mapbox.com/geocoding/v5/mapbox.places/" +
@@ -10,8 +8,7 @@ const geocode = async address => {
 
   let res = await fetch(url);
   let data = await res.json();
-
-  return data.features[0].center;
+  return data;
 };
 
 module.exports = geocode;

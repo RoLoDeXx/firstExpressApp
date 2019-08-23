@@ -1,27 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Weather</title>
-    <link rel="icon" href="/images/download.png">
-    <link rel="stylesheet" href="./styles/style.css">
-</head>
+{{>head}}
 
 <body>
     <div class="mainSection">
         {{>header}}
         <form>
-            <input type="text" placeholder="Location">
-            <button>Search</button>
+            <input type="text" placeholder="Location" id="searchBar">
+            <button id="searchButton">Search</button>
         </form>
-
-
+        <div class="container-fluid">
+            <div class="row">
+                <h1 class="h1-responsive">Bio</h1>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <p class="card-text icon-style"><i class="far fa-user icon-style"></i></p>
+                            </div>
+                            <div class="col-sm-11">
+                                <p class="card-text icon-style">{{weatherData}}</p>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <p class="card-text icon-style"><i class="fas fa-map-marker-alt icon-style"></i></p>
+                            </div>
+                            <div class="col-sm-11">
+                                <p class="card-text icon-style">Wayanad</p>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <p class="card-text icon-style"><i class="fas fa-graduation-cap icon-style"></i></p>
+                            </div>
+                            <div class="col-sm-11">
+                                <p class="card-text icon-style">Post Graduate</p>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <p class="card-text icon-style"><i class="far fa-gem icon-style"></i></p>
+                            </div>
+                            <div class="col-sm-11">
+                                <p class="card-text icon-style"><i class="fas fa-rupee-sign"></i>15 Crores+</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     {{>footer}}
-    <script src="./scripts/index.js"></script>
+    <script src="/scripts/index.js"></script>
 
 </body>
 
